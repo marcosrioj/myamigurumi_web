@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: catalog
+          POSTGRES_PASSWORD: catalog
+          POSTGRES_DB: catalog
+        ports: ['5432:5432']
+      identitydb:
+        image: postgres:16
+        env:
+          POSTGRES_USER: identity
+          POSTGRES_PASSWORD: identity
+          POSTGRES_DB: identity
+        ports: ['5433:5432']
+      rabbitmq:
+        image: rabbitmq:3-management
+        ports: ['5672:5672']
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install JS deps
+        run: npm install
+      - name: Lint JS
+        run: npm run lint --if-present
+      - name: Test JS
+        run: npm run test --if-present
+      - name: Build frontends
+        run: npm run build --if-present
+      - name: Restore backend
+        run: dotnet restore backend/Services/Catalog/Api/Catalog.Api.csproj
+      - name: Build backend
+        run: dotnet build backend/Services/Catalog/Api/Catalog.Api.csproj --no-restore
+      - name: Health smoke
+        run: |
+          docker compose up -d catalog-db identity-db rabbitmq
+          sleep 10
+          docker compose up -d catalog-api identity-api
+          sleep 10
+          curl -f http://localhost:5101/health
+          curl -f http://localhost:5100/health

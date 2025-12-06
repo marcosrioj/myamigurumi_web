@@ -1,0 +1,33 @@
+{
+  "name": "@myamigurumi/storefront",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext .ts,.tsx",
+    "test": "jest",
+    "storybook": "start-storybook -p 6006 -s public"
+  },
+  "dependencies": {
+    "@myamigurumi/api": "^0.1.0",
+    "@myamigurumi/ui": "^0.1.0",
+    "@myamigurumi/config": "^0.1.0",
+    "axios": "1.7.7",
+    "react": "^19.0.0-rc.0",
+    "react-dom": "^19.0.0-rc.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "8.2.9",
+    "@storybook/react-vite": "8.2.9",
+    "@types/react": "19.0.0-rc.0",
+    "@types/react-dom": "19.0.0-rc.0",
+    "@vitejs/plugin-react": "4.3.2",
+    "eslint": "9.5.0",
+    "storybook": "8.2.9",
+    "typescript": "5.9.1",
+    "vite": "5.4.8"
+  }
+}

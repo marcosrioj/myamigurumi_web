@@ -1,0 +1,9 @@
+{
+  "color": {
+    "background": { "value": "#fdf8f5" },
+    "surface": { "value": "#ffffff" },
+    "accent": { "value": "#f0544f" },
+    "muted": { "value": "#4f5d75" },
+    "success": { "value": "#66bb6a" }
+  }
+}

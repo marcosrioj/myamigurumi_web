@@ -1,0 +1,21 @@
+{
+  "name": "@myamigurumi/ui",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint src --ext .ts,.tsx",
+    "test": "jest"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0-rc.0",
+    "react-dom": "^19.0.0-rc.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.0.0-rc.0",
+    "@types/react-dom": "19.0.0-rc.0",
+    "typescript": "5.9.1"
+  }
+}

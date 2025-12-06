@@ -1,0 +1,92 @@
+version: '3.9'
+
+networks:
+  myamigurumi:
+    driver: bridge
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - myamigurumi
+
+  catalog-db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: catalog
+      POSTGRES_PASSWORD: catalog
+      POSTGRES_DB: catalog
+    ports:
+      - "5433:5432"
+    networks:
+      - myamigurumi
+
+  identity-db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: identity
+      POSTGRES_PASSWORD: identity
+      POSTGRES_DB: identity
+    ports:
+      - "5434:5432"
+    networks:
+      - myamigurumi
+
+  catalog-api:
+    build: ./backend/Services/Catalog
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__Catalog: Host=catalog-db;Port=5432;Database=catalog;Username=catalog;Password=catalog
+      RabbitMq__Host: rabbitmq
+      Jwt__Issuer: myamigurumi
+      Jwt__Audience: myamigurumi_clients
+      Jwt__Key: super_secret_local
+    depends_on:
+      - catalog-db
+      - rabbitmq
+    ports:
+      - "5101:8080"
+    networks:
+      - myamigurumi
+    profiles: [catalog]
+
+  identity-api:
+    build: ./backend/Services/Identity
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__Identity: Host=identity-db;Port=5432;Database=identity;Username=identity;Password=identity
+      Jwt__Issuer: myamigurumi
+      Jwt__Audience: myamigurumi_clients
+      Jwt__Key: super_secret_local
+    depends_on:
+      - identity-db
+    ports:
+      - "5100:8080"
+    networks:
+      - myamigurumi
+    profiles: [identity]
+
+  storefront:
+    build: ./frontend/apps/storefront
+    environment:
+      VITE_CATALOG_API: http://localhost:5101
+      VITE_IDENTITY_API: http://localhost:5100
+    ports:
+      - "5173:4173"
+    networks:
+      - myamigurumi
+    profiles: [storefront]
+
+  admin:
+    build: ./frontend/apps/admin
+    environment:
+      VITE_CATALOG_API: http://localhost:5101
+      VITE_IDENTITY_API: http://localhost:5100
+    ports:
+      - "5174:4173"
+    networks:
+      - myamigurumi
+    profiles: [admin]

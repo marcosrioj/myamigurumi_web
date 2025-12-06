@@ -1,0 +1,8 @@
+node_modules
+.dist
+frontend/apps/*/dist
+frontend/packages/*/dist
+**/bin
+**/obj
+.env
+.DS_Store

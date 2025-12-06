@@ -1,0 +1,21 @@
+{
+  "name": "@myamigurumi/api",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint src --ext .ts,.tsx",
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "1.7.7"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0-rc.0"
+  },
+  "devDependencies": {
+    "typescript": "5.9.1"
+  }
+}
