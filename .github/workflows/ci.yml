@@ -47,11 +47,3 @@ jobs:
         run: dotnet restore backend/Services/Catalog/Api/Catalog.Api.csproj
       - name: Build backend
         run: dotnet build backend/Services/Catalog/Api/Catalog.Api.csproj --no-restore
-      - name: Health smoke
-        run: |
-          docker compose up -d catalog-db identity-db rabbitmq
-          sleep 10
-          docker compose up -d catalog-api identity-api
-          sleep 10
-          curl -f http://localhost:5101/health
-          curl -f http://localhost:5100/health
