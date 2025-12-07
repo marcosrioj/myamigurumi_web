@@ -13,5 +13,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0-preview.1.25080.3" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0-preview.1" />
     <PackageReference Include="MassTransit" Version="8.2.2" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.2" />
   </ItemGroup>
 </Project>

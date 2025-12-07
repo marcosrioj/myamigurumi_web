@@ -1,5 +1,3 @@
-version: '3.9'
-
 networks:
   myamigurumi:
     driver: bridge
@@ -70,7 +68,9 @@ services:
     profiles: [identity]
 
   storefront:
-    build: ./frontend/apps/storefront
+    build:
+      context: .
+      dockerfile: frontend/apps/storefront/Dockerfile
     environment:
       VITE_CATALOG_API: http://localhost:5101
       VITE_IDENTITY_API: http://localhost:5100
@@ -81,7 +81,9 @@ services:
     profiles: [storefront]
 
   admin:
-    build: ./frontend/apps/admin
+    build:
+      context: .
+      dockerfile: frontend/apps/admin/Dockerfile
     environment:
       VITE_CATALOG_API: http://localhost:5101
       VITE_IDENTITY_API: http://localhost:5100

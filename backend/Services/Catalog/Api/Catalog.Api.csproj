@@ -10,10 +10,10 @@
     <ProjectReference Include="../Infrastructure/Catalog.Infrastructure.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="12.2.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.0-preview.1.25080.6" />
-    <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="6.8.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.0-preview.1.25120.3" />
+    <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="6.5.1" />
     <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="8.0.0" />
   </ItemGroup>
 </Project>

@@ -9,7 +9,7 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddProblemDetails();
+ProblemDetailsExtensions.AddProblemDetails(builder.Services);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -55,7 +55,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 var catalogAssembly = typeof(CreateListingCommand).Assembly;
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(catalogAssembly));
+builder.Services.AddMediatR(catalogAssembly);
 builder.Services.AddCatalogInfrastructure(builder.Configuration);
 
 builder.Services.AddHealthChecks()

@@ -7,7 +7,7 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddProblemDetails();
+ProblemDetailsExtensions.AddProblemDetails(builder.Services);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "Identity API", Version = "v1" });
 });
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SignInCommand).Assembly));
+builder.Services.AddMediatR(typeof(SignInCommand).Assembly);
 builder.Services.AddIdentityInfrastructure(builder.Configuration);
 builder.Services.AddHealthChecks();
 
