@@ -25,6 +25,10 @@ To avoid port conflicts locally/CI, you can override DB host ports:
 ```bash
 CATALOG_DB_PORT=55433 IDENTITY_DB_PORT=55434 docker compose --profile catalog --profile identity up -d
 ```
+RabbitMQ ports can also be overridden if 5672/15672 are in use:
+```bash
+RABBITMQ_AMQP_PORT=5678 RABBITMQ_HTTP_PORT=15679 docker compose up rabbitmq
+```
 - Storefront: `http://localhost:5173`
 - Admin: `http://localhost:5174`
 
