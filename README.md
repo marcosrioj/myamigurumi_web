@@ -20,6 +20,11 @@ docker compose --profile catalog --profile identity --profile storefront --profi
 Services:
 - Catalog API: `http://localhost:5101` (health `/health`)
 - Identity API: `http://localhost:5100` (health `/health`)
+
+To avoid port conflicts locally/CI, you can override DB host ports:
+```bash
+CATALOG_DB_PORT=55433 IDENTITY_DB_PORT=55434 docker compose --profile catalog --profile identity up -d
+```
 - Storefront: `http://localhost:5173`
 - Admin: `http://localhost:5174`
 

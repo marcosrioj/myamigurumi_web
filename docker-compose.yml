@@ -18,7 +18,7 @@ services:
       POSTGRES_PASSWORD: catalog
       POSTGRES_DB: catalog
     ports:
-      - "5433:5432"
+      - "${CATALOG_DB_PORT:-5433}:5432"
     networks:
       - myamigurumi
 
@@ -29,7 +29,7 @@ services:
       POSTGRES_PASSWORD: identity
       POSTGRES_DB: identity
     ports:
-      - "5434:5432"
+      - "${IDENTITY_DB_PORT:-5434}:5432"
     networks:
       - myamigurumi
 
